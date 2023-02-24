@@ -48,10 +48,8 @@ contract SimpleVestingVault {
         owner = msg.sender;
     }
 
-    constructor(IERC20 _token, address _withdrawer) public {
+    constructor() public {
         owner = msg.sender;
-        token = _token;
-        withdrawer = _withdrawer;
     }
 
     function unlocked() public view returns (uint256) {
@@ -95,8 +93,12 @@ contract SimpleVestingVault {
         }
     }
 
-    function addUser(address _account) external onlyOnwer {
+    function setUser(address _account) external onlyOnwer {
         withdrawer = _account;
+    }
+
+    function setToken(IERC20 _token) external onlyOnwer {
+        token = _token;
     }
 
     function withdraw() external onlyWithdrawer {
